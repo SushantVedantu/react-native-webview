@@ -217,7 +217,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
           request = new DownloadManager.Request(Uri.parse(url));
         } catch (IllegalArgumentException ex){
           FLog.w(TAG, "Unable to create DownloadManager.Request for URL: " + url, ex);
-          Toast.makeText((ReactContext) webView.getContext(), "Unable to create DownloadManager.Request for URL: " + url, Toast.LENGTH_SHORT).show()
+          Toast.makeText((ReactContext) webView.getContext(), "Unable to create DownloadManager.Request for URL: " + url, Toast.LENGTH_SHORT).show();
           return;
         }
 
