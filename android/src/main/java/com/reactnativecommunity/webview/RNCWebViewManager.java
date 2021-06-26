@@ -97,7 +97,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.lang.IllegalArgumentException;
-import android.widget.Toast
+import android.widget.Toast;
 
 /**
  * Manages instances of {@link WebView}
