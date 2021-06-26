@@ -96,6 +96,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.lang.IllegalArgumentException;
+import android.widget.Toast
 
 /**
  * Manages instances of {@link WebView}
@@ -210,9 +212,14 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         webView.setIgnoreErrFailedForThisURL(url);
 
         RNCWebViewModule module = getModule(reactContext);
-
-        //DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url.replace("blob:","")));
+        DownloadManager.Request request;
+        try {
+          request = new DownloadManager.Request(Uri.parse(url));
+        } catch (IllegalArgumentException ex){
+          FLog.w(TAG, "Unable to create DownloadManager.Request for URL: " + url, ex);
+          Toast.makeText((ReactContext) webView.getContext(), "Unable to create DownloadManager.Request for URL: " + url, Toast.LENGTH_SHORT).show()
+          return;
+        }
 
         String fileName = URLUtil.guessFileName(url, contentDisposition, mimetype);
         String downloadMessage = "Downloading " + fileName;
